@@ -4,3 +4,5 @@ packrat/lib*/
 \.drake/
 
 data/\.DS_Store
+
+\.Rhistory

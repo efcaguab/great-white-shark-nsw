@@ -42,8 +42,20 @@ tides_gather_pred <- tides_pred %>%
 tides_gather_meta <- tides_read %>%
   gather_plan("metadata", "gather_metadata")
 
+dir.create("./data/processed")
+
+write_data <- drake_plan(
+  './data/processed/predictions.csv' = write_csv(predictions, "./data/processed/predictions.csv"), 
+  './data/processed/metadata.csv' = write_csv(metadata, "./data/processed/metadata.csv"), 
+  file_targets = T, 
+  strings_in_dots = "literals"
+)
+
 # gather plan
-plan <- rbind(tides_read, tides_fit)
+plan <- rbind(tides_read, tides_fit, tides_pred,
+              tides_gather_pred, tides_gather_meta, 
+              write_data)
+
 config <- drake_config(plan)
 vis_drake_graph(config)
 

@@ -23,9 +23,15 @@ tides_read <- drake_plan(
   evaluate_plan(rules = list(FILE = tide_files), expand = T) %>%
   mutate(target = paste("raw", tide_names, sep = "_"))
 
-# make a plan to fit and predict tide data
+# make a plan to fit tide data
 tides_fit <- drake_plan(
   model = fit_tide(raw_NAME)
+) %>%
+  evaluate_plan(rules = list(NAME = tide_names))
+
+# make a plan to compute corrected tide data
+tides_pred <- drake_plan(
+  fit = predict_tide(model_NAME, raw_NAME)
 ) %>%
   evaluate_plan(rules = list(NAME = tide_names))
 

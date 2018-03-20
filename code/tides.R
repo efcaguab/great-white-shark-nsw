@@ -36,3 +36,16 @@ fit_tide <- function(x){
   list(fit = t, metadata = x$metadata)
 }
 
+predict_tide <- function(x, y, by = 0.25){
+  
+  # get minimum and maximum time from the data
+  min_date <- min(y$data$date, na.rm = T)
+  max_date <- max(y$data$date, na.rm = T)
+  
+  # build predictions at the specified interval
+  p <- data_frame(date = seq(min_date, max_date, by = paste(round(by * 60), "min")), 
+             value = predict(x$fit, min_date, max_date, by = 0.25))
+  
+  list(pred = p, metadata = x$metadata)
+}
+

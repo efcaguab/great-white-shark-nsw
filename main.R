@@ -4,6 +4,7 @@ library(tools)
 library(readr)
 library(stringr)
 library(TideHarmonics)
+library(purrr)
 
 # load functions
 functions_folder <- './code'
@@ -34,6 +35,12 @@ tides_pred <- drake_plan(
   fit = predict_tide(model_NAME, raw_NAME)
 ) %>%
   evaluate_plan(rules = list(NAME = tide_names))
+
+tides_gather_pred <- tides_pred %>%
+  gather_plan("predictions", "gather_predictions")
+
+tides_gather_meta <- tides_read %>%
+  gather_plan("metadata", "gather_metadata")
 
 # gather plan
 plan <- rbind(tides_read, tides_fit)

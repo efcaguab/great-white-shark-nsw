@@ -34,6 +34,11 @@ Source: CRAN
 Version: 0.12.16
 Hash: 8cc9dc88c11acdcf8a6dec4a0f1500bc
 
+Package: TideHarmonics
+Source: CRAN
+Version: 0.1-1
+Hash: 417f7f24e48ecac860567e20f97052f1
+
 Package: assertthat
 Source: CRAN
 Version: 0.2.0
@@ -124,6 +129,12 @@ Source: CRAN
 Version: 0.6
 Hash: aa3d5b7912b5fed4b546ed5cd2a1760b
 
+Package: hms
+Source: CRAN
+Version: 0.4.2
+Requires: pkgconfig, rlang
+Hash: b4096a4f6a6736138e9a825c2baaacf0
+
 Package: htmltools
 Source: CRAN
 Version: 0.3.6
@@ -210,6 +221,12 @@ Package: praise
 Source: CRAN
 Version: 1.0.0
 Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
+
+Package: readr
+Source: CRAN
+Version: 1.1.1
+Requires: BH, R6, Rcpp, hms, tibble
+Hash: 66ffd81e88250d1b37fc890a98c9c9de
 
 Package: rlang
 Source: CRAN

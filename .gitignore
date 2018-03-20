@@ -1,2 +1,6 @@
 packrat/lib*/
 .Rproj.user
+
+\.drake/
+
+data/\.DS_Store

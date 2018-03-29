@@ -4,13 +4,14 @@ The code was build with replicability on mind. It uses `packrat` to manage packa
 
 The easiest way to get the code to run in your computer is:
 
-1. Download github for mac
-2. Clone the repository in your computer
-3. Open the project in Rstudio. Wait until Rstudio installs the required packages
-4. Run the code. There are three ways to do this
-  a) Go to the Terminal tab in Rstudio and type `make`
-  b) Go to the Build tab in Rstudio and click "Build All"
-  c) Open `main.R` and source the code
+1. Get the code. Two ways to to this
+    * Download [github](https://desktop.github.com), login & clone the repository in your computer
+    * Just download the code from the repo
+2. Open the project in Rstudio. Wait until Rstudio installs the required packages
+3. Run the code. There are three ways to do this
+    * Go to the Terminal tab in Rstudio and type `make`
+    * Go to the Build tab in Rstudio and click "Build All"
+    * Open `main.R` and source the code
 
 ## Tides
 
@@ -29,4 +30,4 @@ From this file should be OK to use code that finds the maxima and minima to infe
 Second, the `metadata.csv` file contains information of each of the sites. 
 
 Generating new tidal models for different sites or different dates is straightforward. 
-Just update the csv files in `data/tides` and re-run the code as explained in the point #4 above. 
+Just update the csv files in `data/tides` and re-run the code as explained in the point #3 above. 

@@ -3,7 +3,9 @@
 
 # the time resolution of the the corrected tides in hours. For example 1/6 means
 # tides will be calculated every (60/6) 10 mins.
-by <- 1/6 
+resolution_predicted_tides <- 1/6 
+# the length of the bins at which data is being aggregated
+aggregation_bin <- "1 hour"
 
 # plans -------------------------------------------------------------------
 
@@ -41,7 +43,7 @@ tides_fit <- drake_plan(
 
 # make a plan to compute corrected tide data
 tides_pred <- drake_plan(
-  fit = predict_tide(model_NAME, raw_NAME, by = by)
+  fit = predict_tide(model_NAME, raw_NAME, by = resolution_predicted_tides)
 ) %>%
   evaluate_plan(rules = list(NAME = tide_names))
 
@@ -53,10 +55,11 @@ tides_gather_pred <- tides_pred %>%
 tides_gather_meta <- tides_read %>%
   gather_plan("metadata", "gather_metadata")
 
-# calculate high-low tides
+# calculate high-low tides & aggregate
 
 processing_tides <- drake_plan(
-  hl_tides = high_lows(predictions)
+  hl_tides = high_lows(predictions), 
+  aggregated_tides = aggregate_tides(predictions, aggregation_bin)
 )
 
 dir.create("./data/processed")
@@ -65,6 +68,7 @@ write_data <- drake_plan(
   './data/processed/predictions.csv' = write_csv(predictions, "./data/processed/predictions.csv"), 
   './data/processed/metadata.csv' = write_csv(metadata, "./data/processed/metadata.csv"), 
   './data/processed/high_low.csv' = write_csv(hl_tides, "./data/processed/high_low.csv"),
+  './data/processed/aggregated_tides' = write_csv(aggregated_tides, "./data/processed/aggregated_tides"),
   file_targets = T, 
   strings_in_dots = "literals"
 )

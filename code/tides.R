@@ -44,7 +44,7 @@ predict_tide <- function(x, y, by = 0.25){
   
   # build predictions at the specified interval
   p <- data_frame(date = seq(min_date, max_date, by = paste(round(by * 60), "min")), 
-             value = predict(x$fit, min_date, max_date, by = 0.25))
+             value = predict(x$fit, min_date, max_date, by = by))
   
   list(pred = p, metadata = x$metadata)
 }

@@ -1,3 +1,12 @@
+
+# parameters --------------------------------------------------------------
+
+# the time resolution of the the corrected tides in hours. For example 1/6 means
+# tides will be calculated every (60/6) 10 mins.
+by <- 1/6 
+
+# plans -------------------------------------------------------------------
+
 library(drake)
 library(dplyr)
 library(tools)
@@ -32,7 +41,7 @@ tides_fit <- drake_plan(
 
 # make a plan to compute corrected tide data
 tides_pred <- drake_plan(
-  fit = predict_tide(model_NAME, raw_NAME, by = 1/6)
+  fit = predict_tide(model_NAME, raw_NAME, by = by)
 ) %>%
   evaluate_plan(rules = list(NAME = tide_names))
 

@@ -6,3 +6,11 @@ packrat/lib*/
 data/\.DS_Store
 
 \.Rhistory
+
+data/processed/metadata\.csv
+
+data/processed/predictions\.csv
+
+data/processed/high_low\.csv
+
+data/processed/aggregated_tides

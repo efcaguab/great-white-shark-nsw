@@ -32,9 +32,11 @@ tides_fit <- drake_plan(
 
 # make a plan to compute corrected tide data
 tides_pred <- drake_plan(
-  fit = predict_tide(model_NAME, raw_NAME)
+  fit = predict_tide(model_NAME, raw_NAME, by = 1/6)
 ) %>%
   evaluate_plan(rules = list(NAME = tide_names))
+
+# plans to gather predictions and metadata
 
 tides_gather_pred <- tides_pred %>%
   gather_plan("predictions", "gather_predictions")
@@ -64,7 +66,7 @@ plan <- rbind(tides_read, tides_fit, tides_pred,
               write_data)
 
 config <- drake_config(plan)
-vis_drake_graph(config)
+vis_drake_graph(config, targets_only = T)
 
 # run plan
 make(plan)

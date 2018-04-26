@@ -24,10 +24,23 @@ To do that we use a tidal model.
 
 This code fits a tidal model for each of the files in the `data/tides` directory. Files must be in ".csv"" format. 
 The models are fit using the `ftide` function of the `TideHarmonics` package. It uses 114 constituents of the tides and hence a very accurate approximation to the tide levels. 
-The output of the code is two csv files in the folder `data/processed`. 
-First, `predictions.csv` file contains tidal water height every 15 minutes in each of the locations. 
+
+### Parameters
+
+Parameters are set at the beginning of the `main.R` script:
+
+* `resolution_predicted_tides`: the time resolution of the the corrected tides in hours. For example 1/6 mean tides will be calculated every (60/6) 10 mins.
+* `aggregation_bin`: the length of the bins at which data is being aggregated
+
+### Outputs
+
+The output of the code is four csv files in the folder `data/processed`. 
+
+* `predictions.csv`: contains tidal water height in each of the locations. The resolution of the predictions is given by the `resolution_predicted_tides` parameter. 
 From this file should be OK to use code that finds the maxima and minima to infer times of high/low tide. 
-Second, the `metadata.csv` file contains information of each of the sites. 
+* `metadata.csv`: contains information of each of the sites. 
+* `high_low.csv`: contains the date-times at which high and low tides. Resolution the same as that of the predictions. Therefore is given by the parameter `resolution_predicted_tides`.
+* `aggregated_tides`: contains the mean tide height for each bin defined by the `aggretation_bin` parameter (for example "1 hour") in each locations. 
 
 Generating new tidal models for different sites or different dates is straightforward. 
 Just update the csv files in `data/tides` and re-run the code as explained in the point #3 above. 

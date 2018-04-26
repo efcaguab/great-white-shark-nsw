@@ -42,18 +42,25 @@ tides_gather_pred <- tides_pred %>%
 tides_gather_meta <- tides_read %>%
   gather_plan("metadata", "gather_metadata")
 
+# calculate high-low tides
+
+processing_tides <- drake_plan(
+  hl_tides = high_low(predictions)
+)
+
 dir.create("./data/processed")
 
 write_data <- drake_plan(
   './data/processed/predictions.csv' = write_csv(predictions, "./data/processed/predictions.csv"), 
   './data/processed/metadata.csv' = write_csv(metadata, "./data/processed/metadata.csv"), 
+  './data/processed/high_low.csv' = write_csv(hl_tides, "./data/processed/high_low.csv"),
   file_targets = T, 
   strings_in_dots = "literals"
 )
 
 # gather plan
 plan <- rbind(tides_read, tides_fit, tides_pred,
-              tides_gather_pred, tides_gather_meta, 
+              tides_gather_pred, tides_gather_meta, processing_tides,
               write_data)
 
 config <- drake_config(plan)

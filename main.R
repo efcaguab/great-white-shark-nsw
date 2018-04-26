@@ -56,7 +56,7 @@ tides_gather_meta <- tides_read %>%
 # calculate high-low tides
 
 processing_tides <- drake_plan(
-  hl_tides = high_low(predictions)
+  hl_tides = high_lows(predictions)
 )
 
 dir.create("./data/processed")

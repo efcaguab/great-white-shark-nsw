@@ -65,11 +65,10 @@ processing_tides <- drake_plan(
 dir.create("./data/processed")
 
 write_data <- drake_plan(
-  './data/processed/predictions.csv' = write_csv(predictions, "./data/processed/predictions.csv"), 
-  './data/processed/metadata.csv' = write_csv(metadata, "./data/processed/metadata.csv"), 
-  './data/processed/high_low.csv' = write_csv(hl_tides, "./data/processed/high_low.csv"),
-  './data/processed/aggregated_tides' = write_csv(aggregated_tides, "./data/processed/aggregated_tides"),
-  file_targets = T, 
+  write_csv(predictions, file_out('./data/processed/predictions.csv')), 
+  write_csv(metadata, file_out('./data/processed/metadata.csv')), 
+  write_csv(hl_tides, file_out('./data/processed/high_low.csv')),
+  write_csv(aggregated_tides, file_out('./data/processed/aggregated_tides.csv')),
   strings_in_dots = "literals"
 )
 
@@ -79,7 +78,6 @@ plan <- rbind(tides_read, tides_fit, tides_pred,
               write_data)
 
 config <- drake_config(plan)
-vis_drake_graph(config, targets_only = T)
 
 # run plan
 make(plan)

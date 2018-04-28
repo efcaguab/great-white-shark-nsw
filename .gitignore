@@ -14,3 +14,5 @@ data/processed/predictions\.csv
 data/processed/high_low\.csv
 
 data/processed/aggregated_tides
+
+data/processed/aggregated_tides\.csv

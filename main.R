@@ -3,7 +3,7 @@
 
 # the time resolution of the the corrected tides in hours. For example 1/6 means
 # tides will be calculated every (60/6) 10 mins.
-resolution_predicted_tides <- 1/6 
+resolution_predicted_tides <- 1/4 
 # the length of the bins at which data is being aggregated
 aggregation_bin <- "1 hour"
 

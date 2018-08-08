@@ -8,12 +8,10 @@ read_tide <- function(x){
   # read files
   data <- read_csv(x, skip = 31, 
                    col_names = c("date", "time", "value", "state"), 
-                   col_types = "ccdc") %>%
+                   col_types = "ccdc") %>% 
     # extract date from data
     mutate(date = paste(date, time), 
-           date = as.POSIXct(date, 
-                             tz = "Australia/Sydney", 
-                             format = "%d/%m/%Y %H:%M"), 
+           date = lubridate::dmy_hms(date, tz = "Australia/Sydney"),
            # make sure value is treated as numeric
            value = as.numeric(value)) %>%
     select(-time) 
@@ -49,3 +47,13 @@ predict_tide <- function(x, y, by = 0.25){
   list(pred = p, metadata = x$metadata)
 }
 
+
+error <- function(raw, fit){
+  raw <- readd(raw_BallinaBreakwall)
+  fit <- readd(fit_BallinaBreakwall)
+  a <- dplyr::inner_join(raw$data, fit$pred, by = "date") %>%
+    dplyr::mutate(diff = value.x - value.y) %>%
+    filter(date > as.POSIXct("2017-01-01"), date < as.POSIXct("2018-01-01"))
+  
+  plot(a$date, a$diff, "l")
+}

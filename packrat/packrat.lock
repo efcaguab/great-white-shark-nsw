@@ -1,12 +1,18 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.8.1
-RVersion: 3.4.2
+RVersion: 3.4.4
 Repos: CRAN=https://cran.rstudio.com/
 
 Package: BH
 Source: CRAN
 Version: 1.66.0-1
 Hash: 4cc8883584b955ed01f38f68bc03af6d
+
+Package: CodeDepends
+Source: CRAN
+Version: 0.5-3
+Hash: 6c909e1c31d91f091679a26837991a9b
+Requires: XML
 
 Package: R.methodsS3
 Source: CRAN
@@ -39,6 +45,11 @@ Package: TideHarmonics
 Source: CRAN
 Version: 0.1-1
 Hash: 417f7f24e48ecac860567e20f97052f1
+
+Package: XML
+Source: CRAN
+Version: 3.98-1.11
+Hash: 93ca736e34d01f5952dc770fbfa5fa62
 
 Package: assertthat
 Source: CRAN
@@ -86,11 +97,12 @@ Requires: BH, R6, Rcpp, assertthat, bindrcpp, glue, magrittr,
 
 Package: drake
 Source: CRAN
-Version: 5.0.0
-Hash: ebf130066738de0f206790864b4c233c
-Requires: R.utils, crayon, digest, evaluate, formatR, future,
-    future.apply, igraph, knitr, lubridate, magrittr, plyr, rprojroot,
-    storr, stringi, stringr, testthat, visNetwork, withr
+Version: 5.1.2
+Hash: ead6948823c9d91f10d141733b60d177
+Requires: CodeDepends, R.utils, R6, bindr, crayon, digest, dplyr,
+    evaluate, formatR, future, future.apply, igraph, knitr, lubridate,
+    magrittr, pkgconfig, plyr, purrr, rlang, rprojroot, storr, stringi,
+    testthat, tibble, tidyselect, visNetwork, withr
 
 Package: evaluate
 Source: CRAN
@@ -275,6 +287,12 @@ Source: CRAN
 Version: 1.4.2
 Hash: 83895360ce4f8d2ce92eee00526b5b0b
 Requires: cli, crayon, pillar, rlang
+
+Package: tidyselect
+Source: CRAN
+Version: 0.2.4
+Hash: 9d6ecd816c267bb44b1a29481841e344
+Requires: Rcpp, glue, purrr, rlang
 
 Package: utf8
 Source: CRAN
